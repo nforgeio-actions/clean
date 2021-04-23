@@ -16,6 +16,9 @@ This action currently clears the GITHUB_WORKSPACE directory and may potentially 
 runner machine state in the future.  It's a good idea to execute this action as the first
 step of a workflow to try to ensure that the runner is in a predictable state.
 
+NOTE: You must run the **setup-node** action before this to ensure that Node.js is configured on the runner.
+
+
 ## Examples
 
 **Clear runner state at the beginning of a workflow**
@@ -26,12 +29,22 @@ jobs:
   my-job:
     runs-on: self-hosted
     steps:
-    - id: clean
-      uses: nforgeio-actions/clean@master
+
+    # Run this first to ensure that Node.js is configured on the runner
+    # because the [clean] action depends on this.
+
     - id: setup-node
       uses: actions/setup-node@v2
+
+    # Clean the runner state.
+
+    - id: clean
+      uses: nforgeio-actions/clean@master
       with:
         node-version: '14'    
+
+    # Remaining workflow steps:
+
     - id: environment
       uses: nforgeio-actions/environment@master
       with:
