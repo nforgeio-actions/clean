@@ -13,8 +13,9 @@ I was surprised though that the runner doesn't clear existing state before start
 Perhaps this is because GiHub hosted runners are new born for every workflow execution.
 
 This action currently clears the GITHUB_WORKSPACE directory and may potentially clear other
-runner machine state in the future.  It's a good idea to execute this action as the first
-step of a workflow to try to ensure that the runner is in a predictable state.
+runner machine state in the future.  It's a good idea to execute this action as the second
+step of a workflow (after configuring Node.js) to try to ensure that the runner is in a 
+predictable state.
 
 NOTE: You must run the **setup-node** action before this to ensure that Node.js is configured on the runner.
 
