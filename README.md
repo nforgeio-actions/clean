@@ -20,4 +20,20 @@ step of a workflow to try to ensure that the runner is in a predictable state.
 
 **Clear runner state at the beginning of a workflow**
 ```
+name: demo
+on: [ workflow_dispatch ]
+jobs:
+  my-job:
+    runs-on: self-hosted
+    steps:
+    - id: clean
+      uses: nforgeio-actions/clean@master
+    - id: setup-node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'    
+    - id: environment
+      uses: nforgeio-actions/environment@master
+      with:
+        master-password: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
 ```
