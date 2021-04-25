@@ -22,8 +22,6 @@ process.chdir(__dirname);
 
 // Launch the Powershell script.
 
-console.log(process.env);
-
 exec("pwsh -File action.ps1", 
   function(err, stdout, stderr) {
   
