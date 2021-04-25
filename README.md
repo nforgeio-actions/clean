@@ -20,7 +20,6 @@ any potentially sensitive files run the runner.
 
 NOTE: You must run the **setup-node** action before this to ensure that Node.js is configured on the runner.
 
-
 ## Examples
 
 **Clear runner state at the beginning of a workflow**
