@@ -22,13 +22,13 @@ process.chdir(__dirname);
 
 // Launch the Powershell script.
 
-exec("pwsh -File action.ps1", 
-  function(err, stdout, stderr) {
-  
-      process.stdout.write(stdout); 
-      process.stderr.write(stderr); 
+exec("pwsh -File action.ps1", { maxBuffer: 1024 * 1024 },
+    function (err, stdout, stderr) {
 
-      if (err) {
-          core.setFailed(`Action failed: ${err}`);
-      }
+        process.stdout.write(stdout);
+        process.stderr.write(stderr);
+
+        if (err) {
+            core.setFailed(`Action failed: ${err}`);
+        }
     });
