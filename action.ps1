@@ -31,4 +31,4 @@ Pop-Location
 
 # Clear the runner state.
 
-Get-ChildItem -Path $env:GITHUB_WORKSPACE -Include * -File -Recurse | foreach { $_.Delete()}
+[System.IO.Directory]::Delete($env:GITHUB_WORKSPACE, $true)
