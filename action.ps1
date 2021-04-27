@@ -29,6 +29,14 @@ Push-Location $ncPowershell
 . ./includes.ps1
 Pop-Location
 
-# Clear the runner state.
+# Clear the runner workspace folder.
 
-[System.IO.Directory]::Delete($env:GITHUB_WORKSPACE, $true)
+ForEach ($filePath in [System.IO.Directory]::GetFiles())
+{
+    [System.IO.File]::Delete($filePath)
+}
+
+ForEach ($folderPath in [System.IO.Directory]::GetSirectories())
+{
+    [System.IO.Directory]::Delete($folderPath, $true)
+}
