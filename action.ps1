@@ -31,4 +31,4 @@ Pop-Location
 
 # Clear the runner state.
 
-Clean-Directory $env:GITHUB_WORKSPACE
+Clear-Directory $env:GITHUB_WORKSPACE
