@@ -26,9 +26,9 @@ if ([System.String]::IsNullOrEmpty($ncRoot) -or ![System.IO.Directory]::Exists($
 
 $ncPowershell = [System.IO.Path]::Combine($ncRoot, "Powershell")
 
-Push-Location $ncPowershell
+Push-Location $ncPowershell | Out-Null
 . ./includes.ps1
-Pop-Location
+Pop-Location | Out-Null
 
 # Clear the runner state.
 
