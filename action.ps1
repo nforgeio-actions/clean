@@ -35,10 +35,7 @@ Pop-Location | Out-Null
 
 neon-build clean $env:NF_ROOT -all
 neon-build clean $env:NC_ROOT -all
-
-# Enable this after we relocate neonLIBRARY to it's own repo:
-
-# neon-build clean $env:NL_ROOT -all
+neon-build clean $env:NL_ROOT -all
 
 # Stop and remove any local Hyper-V VMs.  Note that we don't need to 
 # remove the VHDX files here because they're located in the runner's 
