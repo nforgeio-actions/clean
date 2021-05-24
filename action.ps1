@@ -45,7 +45,7 @@ neon-build clean $env:NL_ROOT -all
 Get-VM | Stop-VM -TurnOff -Force
 Get-VM | Remove-VM -Force
 
-# Clear the runner state.
+# Clear the runner workspace.
 
 Clear-Directory $env:GITHUB_WORKSPACE -IgnoreErrors
 
