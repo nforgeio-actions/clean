@@ -47,8 +47,8 @@ Get-VM | Remove-VM -Force
 
 # Clear the runner state.
 
-Clear-Directory $env:GITHUB_WORKSPACE
+Clear-Directory $env:GITHUB_WORKSPACE -IgnoreErrors
 
 # Clear the TMP directory
 
-Clear-Directory $env:TMP
+Clear-Directory $env:TMP -IgnoreErrors
