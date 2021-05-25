@@ -30,25 +30,75 @@ Push-Location $ncPowershell | Out-Null
 . ./includes.ps1
 Pop-Location | Out-Null
 
-# Use the [neon-build] tool (pre-built in neonKUBE) to clear the 
-# bin/obj folders in the local code repos.
+# Fetch the inputs
 
-neon-build clean $env:NF_ROOT -all
-neon-build clean $env:NC_ROOT -all
-neon-build clean $env:NL_ROOT -all
+$workspace  = Get-ActionInputBool "workspace"  $true
+$builds     = Get-ActionInputBool "builds"     $true
+$vms        = Get-ActionInputBool "vms"        $true
+$containers = Get-ActionInputBool "containers" $true
+$nuget      = Get-ActionInputBool "nuget"      $true
+$tmp        = Get-ActionInputBool "tmp"        $true
 
-# Stop and remove any local Hyper-V VMs.  Note that we don't need to 
-# remove the VHDX files here because they're located in the runner's 
-# workspace directory and will be removed when we clear that directory 
-# below.
+try
+{
+    # Clear the runner workspace.
 
-Get-VM | Stop-VM -TurnOff -Force
-Get-VM | Remove-VM -Force
+    if ($workspace)
+    {
+        Clear-Directory $env:GITHUB_WORKSPACE -IgnoreErrors
+    }
 
-# Clear the runner workspace.
+    # Use the [neon-build] tool (pre-built in neonKUBE) to clear the 
+    # bin/obj folders in the local code repos.
 
-Clear-Directory $env:GITHUB_WORKSPACE -IgnoreErrors
+    if ($builds)
+    {
+        neon-build clean $env:NF_ROOT -all
+        neon-build clean $env:NC_ROOT -all
+        neon-build clean $env:NL_ROOT -all
+    }
 
-# Clear the TMP directory
+    # Stop and remove any local Hyper-V VMs.  Note that we don't need to 
+    # remove the VHDX files here because they're located in the runner's 
+    # workspace directory and will be removed when we clear that directory 
+    # below.
 
-Clear-Directory $env:TMP -IgnoreErrors
+    if ($vms)
+    {
+        Get-VM | Stop-VM -TurnOff -Force
+        Get-VM | Remove-VM -Force
+    }
+
+    # Purge all Docker assets including containers and images
+
+    if ($containers)
+    {
+        # Stop all running containers
+
+        $containerIds = $(docker ps -q)
+        docker kill $containerIds
+
+        # Now purge all stopped containers, networks, and images
+
+        docker system prune --all --force
+    }
+
+    # Clear the nuget package caches
+
+    if ($nuget)
+    {
+        nuget locals all -clear
+    }
+
+    # Clear the TMP directory
+
+    if ($tmp)
+    {
+        Clear-Directory $env:TMP -IgnoreErrors
+    }
+}
+catch
+{
+    Write-ActionException $_
+    exit 1
+}
