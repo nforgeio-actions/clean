@@ -45,6 +45,11 @@ try
 
     if ($workspace)
     {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                        CLEAN GITHUB WORKSPACE                           ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
         Clear-Directory $env:GITHUB_WORKSPACE -IgnoreErrors
     }
 
@@ -53,6 +58,12 @@ try
 
     if ($builds)
     {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                             CLEAN BUILDS                                ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
         neon-build clean $env:NF_ROOT -all
         neon-build clean $env:NC_ROOT -all
         neon-build clean $env:NL_ROOT -all
@@ -65,6 +76,12 @@ try
 
     if ($vms)
     {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                           CLEAN HYPER VMs                               ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
         Get-VM | Stop-VM -TurnOff -Force
         Get-VM | Remove-VM -Force
     }
@@ -73,6 +90,12 @@ try
 
     if ($containers)
     {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                          CLEAN CONTAINERS                               ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
         # Stop all running containers
 
         $containerIds = $(docker ps -q)
@@ -87,6 +110,12 @@ try
 
     if ($nuget)
     {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                          CLEAN NUGET CACHE                              ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
         nuget locals all -clear
     }
 
@@ -94,6 +123,12 @@ try
 
     if ($tmp)
     {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                           CLEAN TMP FOLDER                              ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
         Clear-Directory $env:TMP -IgnoreErrors
     }
 }
