@@ -35,7 +35,7 @@ Pop-Location | Out-Null
 $workspace  = Get-ActionInputBool "workspace"  $true
 $builds     = Get-ActionInputBool "builds"     $true
 $hyperv     = Get-ActionInputBool "hyperv"     $true
-$xenServer  = Get-ActionInputBool "xenserver"  $true
+$xenserver  = Get-ActionInputBool "xenserver"  $true
 $containers = Get-ActionInputBool "containers" $true
 $nuget      = Get-ActionInputBool "nuget"      $true
 $tmp        = Get-ActionInputBool "tmp"        $true
