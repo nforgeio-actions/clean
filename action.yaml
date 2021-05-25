@@ -28,8 +28,12 @@ inputs:
     description: "Clears the bin/obj folders for the solutions"
     required: false
     default: "true"
-  vms:
+  hyperv:
     description: "Stops and deletes any hyper-v VMs"
+    required: false
+    default: "true"
+  xenserver:
+    description: "Stops and deletes any xenserver VMs"
     required: false
     default: "true"
   containers:

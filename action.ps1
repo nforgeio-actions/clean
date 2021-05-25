@@ -34,7 +34,8 @@ Pop-Location | Out-Null
 
 $workspace  = Get-ActionInputBool "workspace"  $true
 $builds     = Get-ActionInputBool "builds"     $true
-$vms        = Get-ActionInputBool "vms"        $true
+$hyperv     = Get-ActionInputBool "hyperv"     $true
+$xenServer  = Get-ActionInputBool "xenserver"  $true
 $containers = Get-ActionInputBool "containers" $true
 $nuget      = Get-ActionInputBool "nuget"      $true
 $tmp        = Get-ActionInputBool "tmp"        $true
@@ -74,7 +75,7 @@ try
     # workspace directory and will be removed when we clear that directory 
     # below.
 
-    if ($vms)
+    if ($hyperv)
     {
         Write-Info  ""
         Write-Info  "*******************************************************************************"
@@ -84,6 +85,20 @@ try
 
         Get-VM | Stop-VM -TurnOff -Force
         Get-VM | Remove-VM -Force
+    }
+
+    # Stop and remove any VMs on the related XenServer/XCP-ng host and their
+    # disks, filtering the VMs by cluster prefix.
+
+    if ($xenserver)
+    {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                         CLEAN XENSERVER VMs                             ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
+        # $todo(jefflill): Implement this
     }
 
     # Purge all Docker assets including containers and images
