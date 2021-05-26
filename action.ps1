@@ -116,7 +116,11 @@ try
         # Kill all running containers
 
         $containers = $(docker ps -q)
-        docker kill $containers
+
+        if (![System.String]::IsNullOrEmpty($containers))
+        {
+            docker kill $containers
+        }
 
         # Now purge all stopped containers, networks, and images
 
