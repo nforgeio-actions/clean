@@ -142,7 +142,7 @@ try
 
         ForEach ($distro in $distros)
         {
-            $distro = [System.String]::Trim($distro)
+            $distro = $distro.Trim()
 
             if ($distro.StartsWith("docker"))
             {
