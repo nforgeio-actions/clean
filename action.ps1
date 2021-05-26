@@ -138,7 +138,7 @@ try
         Write-Info  ""
 
         $distros = $(wsl --list --all --quiet)
-        $distros = [System.String]::Split("`n")
+        $distros = $distros.Split("`n")
 
         ForEach ($distro in $distros)
         {
