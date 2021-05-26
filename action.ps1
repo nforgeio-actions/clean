@@ -38,6 +38,7 @@ $hyperv     = Get-ActionInputBool "hyperv"     $true
 $xenserver  = Get-ActionInputBool "xenserver"  $true
 $containers = Get-ActionInputBool "containers" $true
 $nuget      = Get-ActionInputBool "nuget"      $true
+$neonkube   = Get-ActionInputBool "neonkube"   $true
 $tmp        = Get-ActionInputBool "tmp"        $true
 
 try
@@ -119,6 +120,19 @@ try
         # Now purge all stopped containers, networks, and images
 
         docker system prune --all --force
+    }
+
+    # Clear the user's [.neonkube] directory
+
+    if ($nuget)
+    {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                          CLEAN [.neonkube                               ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
+        Clear-Directory "$env:USERPROFILE\.neonkube" -IgnoreErrors
     }
 
     # Clear the nuget package caches

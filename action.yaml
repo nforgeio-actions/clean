@@ -44,6 +44,10 @@ inputs:
     description: "Clears the nuget package caches"
     required: false
     default: "true"
+  neonkube:
+    description: "Clears the user's [.neonkube] folder"
+    required: false
+    default: "true"
   tmp:
     description: "Clears the TMP folder"
     required: false
