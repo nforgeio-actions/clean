@@ -115,7 +115,8 @@ try
 
         # Kill all running containers
 
-        docker kill $(docker ps -q)
+        $containers = $(docker ps -q)
+        docker kill $containers
 
         # Now purge all stopped containers, networks, and images
 
