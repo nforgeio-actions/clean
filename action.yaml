@@ -40,6 +40,10 @@ inputs:
     description: "Prunes all Docker assets including containers and images"
     required: false
     default: "true"
+  wsl:
+    description: "Removes all WSL distributions except for those belonging to Docker"
+    required: false
+    default: "true"
   nuget:
     description: "Clears the nuget package caches"
     required: false

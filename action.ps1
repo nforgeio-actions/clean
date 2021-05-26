@@ -37,6 +37,7 @@ $builds     = Get-ActionInputBool "builds"     $true
 $hyperv     = Get-ActionInputBool "hyperv"     $true
 $xenserver  = Get-ActionInputBool "xenserver"  $true
 $containers = Get-ActionInputBool "containers" $true
+$wsl        = Get-ActionInputBool "wsl"        $true
 $nuget      = Get-ActionInputBool "nuget"      $true
 $neonkube   = Get-ActionInputBool "neonkube"   $true
 $tmp        = Get-ActionInputBool "tmp"        $true
@@ -112,14 +113,39 @@ try
         Write-Info  "*******************************************************************************"
         Write-Info  ""
 
-        # Stop all running containers
+        # Kill all running containers
 
-        $containerIds = $(docker ps -q)
-        docker kill $containerIds
+        docker kill $(docker ps -q)
 
         # Now purge all stopped containers, networks, and images
 
         docker system prune --all --force
+    }
+
+    # Delete all WSL distributions except for those belonging to Docker
+
+    if ($wsl)
+    {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                          CLEAN WSL DISTROS                              ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
+        $distros = $(wsl --list --all --quiet)
+        $distros = [System.String]::Split("`n")
+
+        ForEach ($distro in $distros)
+        {
+            $distro = [System.String]::Trim($distro)
+
+            if ($distro.StartsWith("docker"))
+            {
+                Continue
+            }
+
+            wsl --unregister $distro
+        }
     }
 
     # Clear the user's [.neonkube] directory
@@ -128,7 +154,7 @@ try
     {
         Write-Info  ""
         Write-Info  "*******************************************************************************"
-        Write-Info  "***                          CLEAN [.neonkube                               ***"
+        Write-Info  "***                          CLEAN [.neonkube]                              ***"
         Write-Info  "*******************************************************************************"
         Write-Info  ""
 
