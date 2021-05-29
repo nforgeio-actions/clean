@@ -137,9 +137,6 @@ try
         Write-Host  "*******************************************************************************"
         Write-Host  ""
 
-        which wsl
-        wsl --help
-
         $distros = $(wsl --list --all --quiet)
         $distros = $distros.Split("`n")
 
