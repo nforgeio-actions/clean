@@ -9,7 +9,7 @@ Clears the runner state including:
 * clearing the TMP directory
 * stopping any removing any Hype-V VMs
 
-NOTE: You must run the **setup-node** action before this to ensure that Node.js is configured on the runner.
+NOTE: You must run the **setup-node** and **clean** actions before this to ensure that Node.js is configured on the runner and also that the master 1Password is available.
 
 ## Examples
 
@@ -28,17 +28,15 @@ jobs:
     - id: setup-node
       uses: actions/setup-node@v2
 
+    - id: environment
+      uses: nforgeio-actions/environment@master
+      with:
+        master-password: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
+
     # Clean the runner state.
 
     - id: clean
       uses: nforgeio-actions/clean@master
       with:
         node-version: '14'    
-
-    # Remaining workflow steps:
-
-    - id: environment
-      uses: nforgeio-actions/environment@master
-      with:
-        master-password: ${{ secrets.DEVBOT_MASTER_PASSWORD }}
 ```
