@@ -48,11 +48,11 @@ try
 
     if ($workspace)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                        CLEAN GITHUB WORKSPACE                           ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                        CLEAN GITHUB WORKSPACE                           ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
         Clear-Directory $env:GITHUB_WORKSPACE -IgnoreErrors
     }
 
@@ -61,11 +61,11 @@ try
 
     if ($builds)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                             CLEAN BUILDS                                ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                             CLEAN BUILDS                                ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         neon-build clean $env:NF_ROOT -all
         neon-build clean $env:NC_ROOT -all
@@ -79,11 +79,11 @@ try
 
     if ($hyperv)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                           CLEAN HYPER VMs                               ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                           CLEAN HYPER VMs                               ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         Get-VM | Stop-VM -TurnOff -Force
         Get-VM | Remove-VM -Force
@@ -94,11 +94,11 @@ try
 
     if ($xenserver)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                         CLEAN XENSERVER VMs                             ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                         CLEAN XENSERVER VMs                             ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         $xenHostIP           = Get-ProfileValue "xen.host.ip"
         $xenOwner            = Get-ProfileValue "owner"
@@ -118,11 +118,11 @@ try
 
     if ($wsl)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                          CLEAN WSL DISTROS                              ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                          CLEAN WSL DISTROS                              ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         $distros = $(wsl --list --all --quiet)
         $distros = $distros.Split("`n")
@@ -144,11 +144,11 @@ try
 
     if ($containers)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                          CLEAN CONTAINERS                               ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                          CLEAN CONTAINERS                               ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         # Kill all running containers
 
@@ -168,11 +168,11 @@ try
 
     if ($neonkube)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                          CLEAN [.neonkube]                              ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                          CLEAN [.neonkube]                              ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         Clear-Directory "$env:USERPROFILE\.neonkube" -IgnoreErrors
     }
@@ -181,11 +181,11 @@ try
 
     if ($nuget)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                          CLEAN NUGET CACHE                              ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                          CLEAN NUGET CACHE                              ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         nuget locals all -clear
     }
@@ -194,11 +194,11 @@ try
 
     if ($tmp)
     {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                           CLEAN TMP FOLDER                              ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                           CLEAN TMP FOLDER                              ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
 
         Clear-Directory $env:TMP -IgnoreErrors
     }
