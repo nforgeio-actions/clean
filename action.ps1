@@ -155,7 +155,7 @@ try
 
     # Clear the user's [.neonkube] directory
 
-    if ($nuget)
+    if ($neonkube)
     {
         Write-Info  ""
         Write-Info  "*******************************************************************************"
