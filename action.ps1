@@ -100,31 +100,7 @@ try
         Write-Info  "*******************************************************************************"
         Write-Info  ""
 
-        # $todo(jefflill): Implement this
-    }
-
-    # Purge all Docker assets including containers and images
-
-    if ($containers)
-    {
-        Write-Info  ""
-        Write-Info  "*******************************************************************************"
-        Write-Info  "***                          CLEAN CONTAINERS                               ***"
-        Write-Info  "*******************************************************************************"
-        Write-Info  ""
-
-        # Kill all running containers
-
-        $containers = $(docker ps -q)
-
-        if (![System.String]::IsNullOrEmpty($containers))
-        {
-            docker kill $containers
-        }
-
-        # Now purge all stopped containers, networks, and images
-
-        docker system prune --all --force
+        
     }
 
     # Delete all WSL distributions except for those belonging to Docker
@@ -151,6 +127,30 @@ try
 
             wsl --unregister $distro
         }
+    }
+
+    # Purge all Docker assets including containers and images
+
+    if ($containers)
+    {
+        Write-Info  ""
+        Write-Info  "*******************************************************************************"
+        Write-Info  "***                          CLEAN CONTAINERS                               ***"
+        Write-Info  "*******************************************************************************"
+        Write-Info  ""
+
+        # Kill all running containers
+
+        $containers = $(docker ps -q)
+
+        if (![System.String]::IsNullOrEmpty($containers))
+        {
+            docker kill $containers
+        }
+
+        # Now purge all stopped containers, networks, and images
+
+        docker system prune --all --force
     }
 
     # Clear the user's [.neonkube] directory
