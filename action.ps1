@@ -151,13 +151,13 @@ try
         Write-Info "*******************************************************************************"
         Write-Info ""
 
-        # Kill all running containers
+        # Remove all containers
 
-        $containers = $(docker ps -q)
+        $containers = $(docker ps -a -q)
 
         if (![System.String]::IsNullOrEmpty($containers))
         {
-            docker kill $containers
+            docker rm $containers --force
         }
 
         # Now purge all stopped containers, networks, and images
