@@ -171,12 +171,16 @@ try
         # Remove all Docker volumes
 
         $volumeNames = $(docker volume ls --format "{{ .Name }}")
-        $volumeNames = $volumeNames.Split("`n")
 
-        ForEach ($volume in $volumeNames)
+        if [System.String]::IsNullOrWhiteSpace($volumeNames))
         {
-            $volume = $volume.Trim()
-            docker volume rm "$volume"
+            $volumeNames = $volumeNames.Split("`n")
+
+            ForEach ($volume in $volumeNames)
+            {
+                $volume = $volume.Trim()
+                docker volume rm "$volume"
+            }
         }
     }
 
