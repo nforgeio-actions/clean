@@ -104,9 +104,9 @@ try
         $xenOwner            = Get-ProfileValue "owner"
         $xenCredentialsName  = Get-ProfileValue "xen.credentials.name"
         $xenCredentialsVault = Get-ProfileValue "xen.credentials.vault"
-        $xenUsername         = Get-SecretValue "$xenCredentialsName[username]" $xenCredentialsVault
-        $xenPassword         = Get-SecretValue "$xenCredentialsName[password]" $xenCredentialsVault
-        $xenserverIsRunning  = Check-XenServer $xenHostIP $xenUsername $xenPassword
+        $xenUsername         = Get-SecretValue  "$xenCredentialsName[username]" $xenCredentialsVault
+        $xenPassword         = Get-SecretValue  "$xenCredentialsName[password]" $xenCredentialsVault
+        $xenserverIsRunning  = Check-XenServer  $xenHostIP $xenUsername $xenPassword
 
         if ($xenserverIsRunning)
         {
@@ -140,7 +140,8 @@ try
         }
     }
 
-    # Purge all Docker assets including containers and images
+    # Purge all Docker assets including containers and images.  We're also  going to
+    # ensure that Docker is not running in SWARM mode.  Some unit tests enable this.
 
     if ($containers)
     {
@@ -162,6 +163,10 @@ try
         # Now purge all stopped containers, networks, and images
 
         docker system prune --all --force
+
+        # Disable swarm mode
+
+        docker swarm leave --force
     }
 
     # Clear the user's [.neonkube] directory
