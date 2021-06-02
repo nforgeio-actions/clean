@@ -172,7 +172,7 @@ try
 
         $volumeNames = $(docker volume ls --format "{{ .Name }}")
 
-        if ([System.String]::IsNullOrWhiteSpace($volumeNames))
+        if (![System.String]::IsNullOrWhiteSpace($volumeNames))
         {
             $volumeNames = $volumeNames.Split("`n")
 
