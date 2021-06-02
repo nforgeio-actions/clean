@@ -167,6 +167,17 @@ try
         # Disable swarm mode
 
         docker swarm leave --force
+
+        # Remove all Docker volumes
+
+        $volumeNames = $(docker volume ls --format "{{ .Name }}")
+        $volumeNames = $volumeNames.Split("`n")
+
+        ForEach ($volume in $volumeNames)
+        {
+            $volume = $volume.Trim()
+            docker volume rm "$volume"
+        }
     }
 
     # Clear the user's [.neonkube] directory
