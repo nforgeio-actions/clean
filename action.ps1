@@ -131,7 +131,7 @@ try
         {
             $distro = $distro.Trim()
 
-            if ($distro.StartsWith("docker"))
+            if ($distro.StartsWith("docker") -or [System.String]::IsNullOrEmpty($distro))
             {
                 Continue
             }
