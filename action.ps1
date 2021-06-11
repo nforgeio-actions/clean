@@ -32,17 +32,17 @@ Pop-Location | Out-Null
 
 # Fetch the inputs
 
-$default     = Get-ActionInputBool "default"      $true
-$workspace   = Get-ActionInputBool "workspace"    $default
-$builds      = Get-ActionInputBool "builds"       $default
-$hyperv      = Get-ActionInputBool "hyperv"       $default
-$xenserver   = Get-ActionInputBool "xenserver"    $default
-$containers  = Get-ActionInputBool "containers"   $default
-$wsl         = Get-ActionInputBool "wsl"          $default
-$nuget       = Get-ActionInputBool "nuget"        $default
-$neonkube    = Get-ActionInputBool "neonkube"     $default
-$tmp         = Get-ActionInputBool "tmp"          $default
-$pwshHistory = Get-ActionInputBool "pwsh-history" $default
+$default     = Get-ActionInputBool "clean-default" $true
+$workspace   = Get-ActionInputBool "workspace"     $default
+$builds      = Get-ActionInputBool "builds"        $default
+$hyperv      = Get-ActionInputBool "hyperv"        $default
+$xenserver   = Get-ActionInputBool "xenserver"     $default
+$containers  = Get-ActionInputBool "containers"    $default
+$wsl         = Get-ActionInputBool "wsl"           $default
+$nuget       = Get-ActionInputBool "nuget"         $default
+$neonkube    = Get-ActionInputBool "neonkube"      $default
+$tmp         = Get-ActionInputBool "tmp"           $default
+$pwshHistory = Get-ActionInputBool "pwsh-history"  $default
 
 try
 {

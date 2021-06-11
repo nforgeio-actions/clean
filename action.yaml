@@ -20,7 +20,7 @@
 name: clean
 description: "Clears the runner state including the GITHUB_WORKSPACE directory"
 inputs:
-  default:
+  clean-default:
     description: "The default value for the remaining options"
     required: false
     default: "true"
