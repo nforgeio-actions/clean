@@ -20,42 +20,40 @@
 name: clean
 description: "Clears the runner state including the GITHUB_WORKSPACE directory"
 inputs:
+  default:
+    description: "The default value for the remaining options"
+    required: false
+    default: "true"
   workspace:
     description: "Clears the GitHub runner's workspace folder"
     required: false
-    default: "true"
   builds:
     description: "Clears the bin/obj folders for the solutions"
     required: false
-    default: "true"
   hyperv:
     description: "Stops and deletes any hyper-v VMs"
     required: false
-    default: "true"
   xenserver:
     description: "Stops and deletes any xenserver VMs"
     required: false
-    default: "true"
   containers:
     description: "Prunes all Docker assets including containers and images"
     required: false
-    default: "true"
   wsl:
     description: "Removes all WSL distributions except for those belonging to Docker"
     required: false
-    default: "true"
   nuget:
     description: "Clears the nuget package caches"
     required: false
-    default: "true"
   neonkube:
     description: "Clears the user's [.neonkube] folder"
     required: false
-    default: "true"
   tmp:
     description: "Clears the TMP folder"
     required: false
-    default: "true"
+  pwsh-history:
+    description: "Clears the Powershell command history"
+    required: false
 runs:
   using: node12
   main: action.js

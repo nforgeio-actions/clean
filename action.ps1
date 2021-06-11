@@ -32,15 +32,17 @@ Pop-Location | Out-Null
 
 # Fetch the inputs
 
-$workspace  = Get-ActionInputBool "workspace"  $true
-$builds     = Get-ActionInputBool "builds"     $true
-$hyperv     = Get-ActionInputBool "hyperv"     $true
-$xenserver  = Get-ActionInputBool "xenserver"  $true
-$containers = Get-ActionInputBool "containers" $true
-$wsl        = Get-ActionInputBool "wsl"        $true
-$nuget      = Get-ActionInputBool "nuget"      $true
-$neonkube   = Get-ActionInputBool "neonkube"   $true
-$tmp        = Get-ActionInputBool "tmp"        $true
+$default     = Get-ActionInputBool "default"      $true
+$workspace   = Get-ActionInputBool "workspace"    $default
+$builds      = Get-ActionInputBool "builds"       $default
+$hyperv      = Get-ActionInputBool "hyperv"       $default
+$xenserver   = Get-ActionInputBool "xenserver"    $default
+$containers  = Get-ActionInputBool "containers"   $default
+$wsl         = Get-ActionInputBool "wsl"          $default
+$nuget       = Get-ActionInputBool "nuget"        $default
+$neonkube    = Get-ActionInputBool "neonkube"     $default
+$tmp         = Get-ActionInputBool "tmp"          $default
+$pwshHistory = Get-ActionInputBool "pwsh-history" $default
 
 try
 {
@@ -221,6 +223,21 @@ try
         Write-Info ""
 
         Clear-Directory $env:TMP -IgnoreErrors
+    }
+
+    # Clear the Powershell command history as described here:
+    #
+    #       https://www.shellhacks.com/clear-history-powershell/
+
+    if ($pwshHistory)
+    {
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                       CLEAN POWERSHELL HISTORY                          ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
+
+        Remove-Item (Get-PSReadlineOption).HistorySavePath
     }
 }
 catch
