@@ -237,7 +237,12 @@ try
         Write-Info "*******************************************************************************"
         Write-Info ""
 
-        Remove-Item (Get-PSReadlineOption).HistorySavePath
+        $historyPath = (Get-PSReadlineOption).HistorySavePath
+
+        if ([System.IO.File]::Exists($historyPath)
+        {
+            [System.IO.File]::Delete($historyPath)
+        }
     }
 }
 catch
