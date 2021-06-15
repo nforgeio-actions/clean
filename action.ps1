@@ -239,7 +239,7 @@ try
 
         $historyPath = (Get-PSReadlineOption).HistorySavePath
 
-        if ([System.IO.File]::Exists($historyPath)
+        if ([System.IO.File]::Exists($historyPath))
         {
             [System.IO.File]::Delete($historyPath)
         }
