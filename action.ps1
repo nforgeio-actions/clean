@@ -110,6 +110,11 @@ try
         $xenPassword         = Get-SecretValue  "$xenCredentialsName[password]" $xenCredentialsVault
         $xenserverIsRunning  = Check-XenServer  $xenHostIP $xenUsername $xenPassword
 
+Log-DebugLine "xenHostIP:   $xenHostIP"
+Log-DebugLine "xenUsername: $xenUsername"
+Log-DebugLine "xenPassword: $xenPassword"
+Log-DebugLine "xenOwner:    $xenOwner"
+
         if ($xenserverIsRunning)
         {
             Remove-XenServerVMs $xenHostIP $xenUsername $xenPassword "$xenOwner-*"
