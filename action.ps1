@@ -32,17 +32,20 @@ Pop-Location | Out-Null
 
 # Fetch the inputs
 
-$default     = Get-ActionInputBool "default"      $true
-$workspace   = Get-ActionInputBool "workspace"    $false $default
-$builds      = Get-ActionInputBool "builds"       $false $default
-$hyperv      = Get-ActionInputBool "hyperv"       $false $default
-$xenserver   = Get-ActionInputBool "xenserver"    $false $default
-$containers  = Get-ActionInputBool "containers"   $false $default
-$wsl         = Get-ActionInputBool "wsl"          $false $default
-$nuget       = Get-ActionInputBool "nuget"        $false $default
-$neonkube    = Get-ActionInputBool "neonkube"     $false $default
-$tmp         = Get-ActionInputBool "tmp"          $false $default
-$pwshHistory = Get-ActionInputBool "pwsh-history" $false $default
+$default          = Get-ActionInputBool "default"           $true
+$workspace        = Get-ActionInputBool "workspace"         $false $default
+$builds           = Get-ActionInputBool "builds"            $false $default
+$hyperv           = Get-ActionInputBool "hyperv"            $false $default
+$xenserver        = Get-ActionInputBool "xenserver"         $false $default
+$containers       = Get-ActionInputBool "containers"        $false $default
+$wsl              = Get-ActionInputBool "wsl"               $false $default
+$nuget            = Get-ActionInputBool "nuget"             $false $default
+$neonkube         = Get-ActionInputBool "neonkube"          $false $default
+$tmp              = Get-ActionInputBool "tmp"               $false $default
+$pwshHistory      = Get-ActionInputBool "pwsh-history"      $false $default
+$neonkubeFiles    = Get-ActionInput     "neonkube-files"    $false
+$neonlibraryFiles = Get-ActionInput     "neonlibrary-files" $false
+$neoncloudFiles   = Get-ActionInput     "neoncloud-files"   $false
 
 try
 {
@@ -243,6 +246,40 @@ try
         {
             [System.IO.File]::Delete($historyPath)
         }
+    }
+
+    # Remove repo files when requested
+
+    if (![System.String]::IsNullOrWhiteSpace($neonkubeFiles) -and ![System.String]::IsNullOrWhiteSpaceIsNullOrWhiteSpace($neonlibraryFiles) -and ![System.String]::IsNullOrWhiteSpace($neoncloudFiles))
+    {
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                           CLEAN REPO FILES                              ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
+
+        function RemoveFiles($repoRoot, $patterns)
+        {
+            if ([System.String]::IsNullOrEmpty($repo) -or [System.String]::IsNullOrWhiteSpace($patterns))
+            {
+                return;
+            }
+
+            $patterns = $patterns.Split(" ", "RemoveEmptyEntries")
+
+            foreach ($pattern in $patterns)
+            {
+                foreach ($file in [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories"))
+                {
+                    Write-Info "removing: $file"
+                    [System.IO.File]::Delete($file)
+                }
+            }
+        }
+
+        RemoveFiles($env:NF_ROOT, $neonkubeFiles)
+        RemoveFiles($env:NL_ROOT, $neonlibraryFiles)
+        RemoveFiles($env:NC_ROOT, $neoncloudFiles)
     }
 }
 catch
