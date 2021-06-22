@@ -250,7 +250,7 @@ try
 
     # Remove repo files when requested
 
-    if (![System.String]::IsNullOrWhiteSpace($neonkubeFiles) -and ![System.String]::IsNullOrWhiteSpaceIsNullOrWhiteSpace($neonlibraryFiles) -and ![System.String]::IsNullOrWhiteSpace($neoncloudFiles))
+    if (![System.String]::IsNullOrWhiteSpace($neonkubeFiles) -and ![System.String]::IsNullOrWhiteSpace($neonlibraryFiles) -and ![System.String]::IsNullOrWhiteSpace($neoncloudFiles))
     {
         Write-Info ""
         Write-Info "*******************************************************************************"
