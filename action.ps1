@@ -281,44 +281,28 @@ try
                 [string]$filePatterns
             )
 
-"RemoveFiles 0: root:     $repoRoot"
-"RemoveFiles 1: patterns: $filePatterns"
-
             if ([System.String]::IsNullOrEmpty($repoRoot) -or [System.String]::IsNullOrWhiteSpace($filePatterns))
             {
-"RemoveFiles 2:"
                 return;
             }
-"RemoveFiles 3:"
 
             $patterns = $filePatterns.Split(" ")
-"RemoveFiles 4: $patterns"
 
             foreach ($pattern in $patterns)
             {
-"RemoveFiles 5: pattern: $pattern"
                 if ([System.String]::IsNullOrEmpty($pattern))
                 {
-"RemoveFiles 6:"
                     continue;
                 }
-"RemoveFiles 7:"
-
-Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories")
-"RemoveFiles 8:"
 
                 foreach ($file in [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories"))
                 {
-"RemoveFiles 9:"
                     Write-Info "removing: $file"
                     [System.IO.File]::Delete($file)
                 }
             }
         }
 
-"neonkubeFiles:    $neonkubeFiles"
-"neonlibraryFiles: $neonlibraryFiles"
-"neoncloudFiles:   $neoncloudFiles"
         RemoveFiles $env:NF_ROOT $neonkubeFiles
         RemoveFiles $env:NL_ROOT $neonlibraryFiles
         RemoveFiles $env:NC_ROOT $neoncloudFiles
