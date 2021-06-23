@@ -144,7 +144,7 @@ $ch  = [int]$distro[0]
 
             # Note that for some reason we're seeing a [0] byte for empty distros.
 
-            if ([System.String]::IsNullOrEmpty($distro) -or ([int]$distro[0] -eq 0)
+            if ([System.String]::IsNullOrEmpty($distro) -or ([int]$distro[0] -eq 0))
             {
 "** 0"
                 continue;
