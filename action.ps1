@@ -273,24 +273,35 @@ try
 
         function RemoveFiles($repoRoot, $patterns)
         {
+"RemoveFiles 0: root:     $repoRoot"
+"RemoveFiles 1: patterns: $repoRoot"
+
             if ([System.String]::IsNullOrEmpty($repo) -or [System.String]::IsNullOrWhiteSpace($patterns))
             {
+"RemoveFiles 2:"
                 return;
             }
+"RemoveFiles 3:"
 
             $patterns = $patterns.Split(" ")
+"RemoveFiles 4: $patterns"
 
             foreach ($pattern in $patterns)
             {
+"RemoveFiles 5: pattern: $pattern"
                 if ([System.String]::IsNullOrEmpty($pattern))
                 {
+"RemoveFiles 6:"
                     continue;
                 }
+"RemoveFiles 7:"
 
-                Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories")
+Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories")
+"RemoveFiles 8:"
 
                 foreach ($file in [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories"))
                 {
+"RemoveFiles 9:"
                     Write-Info "removing: $file"
                     [System.IO.File]::Delete($file)
                 }
