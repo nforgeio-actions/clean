@@ -140,7 +140,7 @@ $len = $distro.Length
 $ch  = $distro[0]
 "distro:     [$distro]"
 "distro.len: [{$len}]"
-"distro.ch:  [{$ch}]"
+"distro.ch:  [[int]{$ch}]"
 
             if ([System.String]::IsNullOrEmpty($distro))
             {
