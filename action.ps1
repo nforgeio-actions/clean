@@ -136,7 +136,7 @@ try
         {
             $distro = $distro.Trim()
 
-            if ([System.String]::IsNullOrEmpty($distro))
+            if ([System.String]::IsNullOrWhitespace($distro))
             {
                 continue;
             }
