@@ -184,7 +184,7 @@ try
 
         # Disable swarm mode
 
-        Invoke-CaptureStreams "docker swarm leave --force" -noCheck
+        $result = Invoke-CaptureStreams "docker swarm leave --force" -noCheck
 
         # Remove all Docker volumes
 
@@ -282,7 +282,7 @@ try
             )
 
 "RemoveFiles 0: root:     $repoRoot"
-"RemoveFiles 1: patterns: $repoRoot"
+"RemoveFiles 1: patterns: $patterns"
 
             if ([System.String]::IsNullOrEmpty($repo) -or [System.String]::IsNullOrWhiteSpace($patterns))
             {
@@ -316,6 +316,9 @@ Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectorie
             }
         }
 
+"neonkubeFiles:    $neonkubeFiles"
+"neonlibraryFiles: $neonlibraryFiles"
+"neoncloudFiles:   $neoncloudFiles"
         RemoveFiles $env:NF_ROOT $neonkubeFiles
         RemoveFiles $env:NL_ROOT $neonlibraryFiles
         RemoveFiles $env:NC_ROOT $neoncloudFiles
