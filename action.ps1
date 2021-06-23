@@ -136,12 +136,14 @@ try
         {
             $distro = $distro.Trim()
 
-            "distro: [$distro]"
+"distro: [$distro]"
 
-            if ([System.String]::IsNullOrWhitespace($distro))
+            if ([System.String]::IsNullOrEmpty($distro))
             {
+"** 0"
                 continue;
             }
+"** 1"
 
             if ($distro.StartsWith("docker"))
             {
@@ -149,6 +151,7 @@ try
 
                 Continue
             }
+"** 2"
 
             "RUN: wsl --terminate $distro"
             wsl --terminate $distro
