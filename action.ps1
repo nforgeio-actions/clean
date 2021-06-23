@@ -267,10 +267,15 @@ try
                 return;
             }
 
-            $patterns = $patterns.Split(" ", 100, [System.StringSplitOptions]::RemoveEmptyEntries)
+            $patterns = $patterns.Split(" ")
 
             foreach ($pattern in $patterns)
             {
+                if ([System.String]::IsNullOrEmpty($pattern))
+                {
+                    continue;
+                }
+
                 Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories")
 
                 foreach ($file in [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories"))
