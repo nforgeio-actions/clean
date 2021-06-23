@@ -136,6 +136,8 @@ try
         {
             $distro = $distro.Trim()
 
+            "distro: [$distro]"
+
             if ([System.String]::IsNullOrWhitespace($distro))
             {
                 continue;
@@ -157,7 +159,7 @@ try
     }
 
     # Purge all Docker assets including containers and images.  We're also  going to
-    # ensure that Docker is not running in SWARM mode.  Some unit tests enable this.
+    # ensure that Docker is not running in SWARM mode.  Some unit tests enable that.
 
     if ($containers)
     {
