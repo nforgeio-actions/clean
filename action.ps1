@@ -184,7 +184,7 @@ try
 
         # Disable swarm mode
 
-        Invokd-CaptureStreams "docker swarm leave --force" -noCheck
+        Invoke-CaptureStreams "docker swarm leave --force" -noCheck
 
         # Remove all Docker volumes
 
