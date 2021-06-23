@@ -148,6 +148,10 @@ try
                 Continue
             }
 
+            "RUN: wsl --terminate $distro"
+            wsl --terminate $distro
+
+            "RUN: wsl --unregister $distro"
             wsl --unregister $distro
         }
     }
