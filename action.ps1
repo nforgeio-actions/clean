@@ -271,8 +271,16 @@ try
         Write-Info "*******************************************************************************"
         Write-Info ""
 
-        function RemoveFiles($repoRoot, $patterns)
+        function RemoveFiles
         {
+            [CmdletBinding()]
+            param (
+                [Parameter(Position=0, Mandatory=$true)]
+                [string]$repoRoot,
+                [Parameter(Position=1, Mandatory=$true)]
+                [string]$patterns
+            )
+
 "RemoveFiles 0: root:     $repoRoot"
 "RemoveFiles 1: patterns: $repoRoot"
 
