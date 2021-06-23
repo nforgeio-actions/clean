@@ -137,10 +137,10 @@ try
             $distro = $distro.Trim()
 
 $len = $distro.Length
-$ch  = $distro[0]
+$ch  = [int]$distro[0]
 "distro:     [$distro]"
-"distro.len: [{$len}]"
-"distro.ch:  [[int]{$ch}]"
+"distro.len: [$len]"
+"distro.ch:  [$ch]"
 
             if ([System.String]::IsNullOrEmpty($distro))
             {
