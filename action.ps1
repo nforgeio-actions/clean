@@ -141,7 +141,7 @@ try
                 continue;
             }
 
-            if ($distro.StartsWith("docker") -or [System.String]::IsNullOrEmpty($distro))
+            if ($distro.StartsWith("docker"))
             {
                 # Don't mess with the Docker distros.
 
