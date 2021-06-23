@@ -136,7 +136,8 @@ try
         {
             $distro = $distro.Trim()
 
-"distro: [$distro]"
+"distro:     [$distro]"
+"distro.len: [{$distro.Length}]"
 
             if ([System.String]::IsNullOrEmpty($distro))
             {
