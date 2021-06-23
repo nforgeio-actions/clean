@@ -55,15 +55,15 @@ inputs:
     description: "Clears the Powershell command history"
     required: false
   neonkube-files:
-    description: "Removes any neonKUBE repo files matching any of these space separated patterns"
+    description: "Removes any neonKUBE repo files matching any of these space separated patterns (defaults to [*.mg.cs] unless [default=false])"
     required: false
     default: "*.mg.cs"
   neonlibrary-files:
-    description: "Removes any neonLIBRARY repo files matching any of these space separated patterns"
+    description: "Removes any neonLIBRARY repo files matching any of these space separated patterns (defaults to [*.mg.cs] unless [default=false])"
     required: false
     default: "*.mg.cs"
   neoncloud-files:
-    description: "Removes any neonCLOUD repo files matching any of these space separated patterns"
+    description: "Removes any neonCLOUD repo files matching any of these space separated patterns (defaults to [*.mg.cs] unless [default=false])"
     required: false
     default: "*.mg.cs"
 runs:
