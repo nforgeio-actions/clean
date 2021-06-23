@@ -278,20 +278,20 @@ try
                 [Parameter(Position=0, Mandatory=$true)]
                 [string]$repoRoot,
                 [Parameter(Position=1, Mandatory=$true)]
-                [string]$patterns
+                [string]$filePatterns
             )
 
 "RemoveFiles 0: root:     $repoRoot"
-"RemoveFiles 1: patterns: $patterns"
+"RemoveFiles 1: patterns: $filePatterns"
 
-            if ([System.String]::IsNullOrEmpty($repo) -or [System.String]::IsNullOrWhiteSpace($patterns))
+            if ([System.String]::IsNullOrEmpty($repoRoot) -or [System.String]::IsNullOrWhiteSpace($filePatterns))
             {
 "RemoveFiles 2:"
                 return;
             }
 "RemoveFiles 3:"
 
-            $patterns = $patterns.Split(" ")
+            $patterns = $filePatterns.Split(" ")
 "RemoveFiles 4: $patterns"
 
             foreach ($pattern in $patterns)
