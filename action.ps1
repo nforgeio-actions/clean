@@ -130,11 +130,16 @@ try
         Write-Info ""
 
         $distros = $(wsl --list --all --quiet)
-        $distros = $distros.Split("`n", "RemoveEmptyEntries")
+        $distros = $distros.Split("`n")
 
         ForEach ($distro in $distros)
         {
             $distro = $distro.Trim()
+
+            if ([System.String]::IsNullOrEmpty($distro))
+            {
+                continue;
+            }
 
             if ($distro.StartsWith("docker") -or [System.String]::IsNullOrEmpty($distro))
             {
