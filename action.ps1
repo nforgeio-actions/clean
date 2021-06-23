@@ -184,7 +184,7 @@ try
 
         # Disable swarm mode
 
-        docker swarm leave --force | Out-Null
+        docker swarm leave --force 2>&1 | Out-Null
 
         # Remove all Docker volumes
 
@@ -316,9 +316,9 @@ Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectorie
             }
         }
 
-        RemoveFiles($env:NF_ROOT, $neonkubeFiles)
-        RemoveFiles($env:NL_ROOT, $neonlibraryFiles)
-        RemoveFiles($env:NC_ROOT, $neoncloudFiles)
+        RemoveFiles $env:NF_ROOT $neonkubeFiles
+        RemoveFiles $env:NL_ROOT $neonlibraryFiles
+        RemoveFiles $env:NC_ROOT $neoncloudFiles
     }
 }
 catch
