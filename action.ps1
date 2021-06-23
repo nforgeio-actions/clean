@@ -136,20 +136,12 @@ try
         {
             $distro = $distro.Trim()
 
-$len = $distro.Length
-$ch  = [int]$distro[0]
-"distro:     [$distro]"
-"distro.len: [$len]"
-"distro.ch:  [$ch]"
-
             # Note that for some reason we're seeing a [0] byte for empty distros.
 
             if ([System.String]::IsNullOrEmpty($distro) -or ([int]$distro[0] -eq 0))
             {
-"** 0"
                 continue;
             }
-"** 1"
 
             if ($distro.StartsWith("docker"))
             {
@@ -157,7 +149,6 @@ $ch  = [int]$distro[0]
 
                 Continue
             }
-"** 2"
 
             "RUN: wsl --terminate $distro"
             wsl --terminate $distro
