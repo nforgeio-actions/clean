@@ -86,7 +86,7 @@ try
     {
         Write-Info ""
         Write-Info "*******************************************************************************"
-        Write-Info "***                           CLEAN HYPER VMs                               ***"
+        Write-Info "***                          CLEAN HYPER-V VMs                              ***"
         Write-Info "*******************************************************************************"
         Write-Info ""
 
@@ -130,7 +130,7 @@ try
         Write-Info ""
 
         $distros = $(wsl --list --all --quiet)
-        $distros = $distros.Split("`n")
+        $distros = $distros.Split("`n", "RemoveEmptyEntries")
 
         ForEach ($distro in $distros)
         {
@@ -138,6 +138,8 @@ try
 
             if ($distro.StartsWith("docker") -or [System.String]::IsNullOrEmpty($distro))
             {
+                # Don't mess with the Docker distros.
+
                 Continue
             }
 
@@ -152,7 +154,7 @@ try
     {
         Write-Info ""
         Write-Info "*******************************************************************************"
-        Write-Info "***                          CLEAN CONTAINERS                               ***"
+        Write-Info "***                            CLEAN DOCKER                                 ***"
         Write-Info "*******************************************************************************"
         Write-Info ""
 
@@ -171,7 +173,7 @@ try
 
         # Disable swarm mode
 
-        docker swarm leave --force
+        docker swarm leave --force | Out-Null
 
         # Remove all Docker volumes
 
@@ -269,6 +271,8 @@ try
 
             foreach ($pattern in $patterns)
             {
+                Write-Output [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories")
+
                 foreach ($file in [System.IO.Directory]::GetFiles($repoRoot, $pattern, "AllDirectories"))
                 {
                     Write-Info "removing: $file"
