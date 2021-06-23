@@ -267,7 +267,7 @@ try
                 return;
             }
 
-            $patterns = $patterns.Split(" ", 100, "RemoveEmptyEntries")
+            $patterns = $patterns.Split(" ", [System.StringSplitOptions]::RemoveEmptyEntries)
 
             foreach ($pattern in $patterns)
             {
