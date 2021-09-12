@@ -28,7 +28,7 @@ inputs:
     description: "Clears the GitHub runner's workspace folder"
     required: false
   builds:
-    description: "Clears the bin/obj folders for the solutions"
+    description: "Clears the bin/obj and other build related folders for the solutions"
     required: false
   hyperv:
     description: "Stops and deletes any hyper-v VMs"
