@@ -140,7 +140,7 @@ try
         $distros = $(wsl --list --all --quiet)
         $distros = $distros.Split("`n")
 
-        ForEach ($distro in $distros)
+        foreach ($distro in $distros)
         {
             $distro = $distro.Trim()
 
@@ -155,7 +155,7 @@ try
             {
                 # Don't mess with the Docker distros.
 
-                Continue
+                continue
             }
 
             "RUN: wsl --terminate $distro"
@@ -202,7 +202,7 @@ try
         {
             $volumeNames = $volumeNames.Split("`n")
 
-            ForEach ($volume in $volumeNames)
+            foreach ($volume in $volumeNames)
             {
                 $volume = $volume.Trim()
                 docker volume rm "$volume"
