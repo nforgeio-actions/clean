@@ -155,7 +155,7 @@ try
 
             # Note that for some reason we're seeing a [0] byte for empty distros.
 
-            if ([System.String]::IsNullOrEmpty($distro) -or ([int]$distro[0] -eq 0))
+            if ([System.String]::IsNullOrEmpty($distro))
             {
 "WS2: 2: $distro"
                 continue
@@ -163,12 +163,12 @@ try
 
             if ($distro.StartsWith("docker"))
             {
-"WS2: 2: $distro"
+"WS2: 3: $distro"
                 # Don't mess with the Docker distros.
 
                 continue
             }
-"WS2: 3: $distro"
+"WS2: 4: $distro"
 
             "RUN: wsl --terminate $distro"
             wsl --terminate $distro
