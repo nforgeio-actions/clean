@@ -140,15 +140,23 @@ try
         $distros = $(wsl --list --all --quiet)
         $distros = $distros.Split("`n")
 
+        "DISTRO:"
+        $distros
+
         foreach ($distro in $distros)
         {
             $distro = $distro.Trim()
+
+            if [System.String]::IsNullOrEmpty($distro))
+            {
+                continue
+            }
 
             # Note that for some reason we're seeing a [0] byte for empty distros.
 
             if ([System.String]::IsNullOrEmpty($distro) -or ([int]$distro[0] -eq 0))
             {
-                continue;
+                continue
             }
 
             if ($distro.StartsWith("docker"))
