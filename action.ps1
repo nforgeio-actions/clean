@@ -138,9 +138,9 @@ try
         Write-Info ""
 
         $distros = $(wsl --list --all --quiet)
-        $distros = $distros.Split("`n")
+        $distros = $distros.Split("`n", [System.StringSplitOptions]::TrimEntries -bor [System.StringSplitOptions]::RemoveEmptyEntries)
 
-        "DISTRO:"
+        "W2SL2 DISTROS:"
         $distros
 
         foreach ($distro in $distros)
@@ -149,6 +149,7 @@ try
 
             if ([System.String]::IsNullOrEmpty($distro))
             {
+"WS2: 1:"
                 continue
             }
 
@@ -156,15 +157,18 @@ try
 
             if ([System.String]::IsNullOrEmpty($distro) -or ([int]$distro[0] -eq 0))
             {
+"WS2: 2: $distro"
                 continue
             }
 
             if ($distro.StartsWith("docker"))
             {
+"WS2: 2: $distro"
                 # Don't mess with the Docker distros.
 
                 continue
             }
+"WS2: 3: $distro"
 
             "RUN: wsl --terminate $distro"
             wsl --terminate $distro
