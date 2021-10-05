@@ -147,9 +147,10 @@ try
         {
             $distro = $distro.Trim()
 
+"WS2: 0: $distro"
             if ([System.String]::IsNullOrEmpty($distro))
             {
-"WS2: 1:"
+"WS2: 1: $distro"
                 continue
             }
 
