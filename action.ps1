@@ -138,9 +138,20 @@ try
         Write-Info ""
 
         $distros = $(wsl --list --all --quiet)
+
+        # $hack(jefflill): 
+        #
+        # The WSL CLI returns the result as UTF-16 (grrrr...), so
+        # we're going to strip out any zero bytes to convert this
+        # to something reasonable.  This probably won't work for 
+        # non-ASCII characters, but we don't currently use any for
+        # unit testing.
+                                                    
+        $distros = $distros.Replace("`0", "")
+
         $distros = $distros.Split("`n", [System.StringSplitOptions]::TrimEntries -bor [System.StringSplitOptions]::RemoveEmptyEntries)
 
-        "W2SL2 DISTROS:"
+        "W2SL2 DISTROS: length=${distros.Length}"
         $distros
 
         foreach ($distro in $distros)
