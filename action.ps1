@@ -151,17 +151,12 @@ try
 
         $distros = $distros.Split("`n", [System.StringSplitOptions]::TrimEntries -bor [System.StringSplitOptions]::RemoveEmptyEntries)
 
-        "W2SL2 DISTROS: length=${distros.Length}"
-        $distros
-
         foreach ($distro in $distros)
         {
             $distro = $distro.Trim()
 
-"WS2: 0: $distro"
             if ([System.String]::IsNullOrEmpty($distro))
             {
-"WS2: 1: $distro"
                 continue
             }
 
@@ -169,18 +164,15 @@ try
 
             if ([System.String]::IsNullOrEmpty($distro))
             {
-"WS2: 2: $distro"
                 continue
             }
 
             if ($distro.StartsWith("docker"))
             {
-"WS2: 3: $distro"
                 # Don't mess with the Docker distros.
 
                 continue
             }
-"WS2: 4: $distro"
 
             "RUN: wsl --terminate $distro"
             wsl --terminate $distro
