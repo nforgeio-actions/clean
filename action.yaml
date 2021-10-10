@@ -45,6 +45,9 @@ inputs:
   nuget:
     description: "Clears the nuget package caches"
     required: false
+  kube:
+    description: "Clears the user's [.kube] folder"
+    required: false
   neonkube:
     description: "Clears the user's [.neonkube] folder"
     required: false

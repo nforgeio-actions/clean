@@ -40,6 +40,7 @@ $xenserver        = Get-ActionInputBool "xenserver"    $false $default
 $containers       = Get-ActionInputBool "containers"   $false $default
 $wsl              = Get-ActionInputBool "wsl"          $false $default
 $nuget            = Get-ActionInputBool "nuget"        $false $default
+$kube             = Get-ActionInputBool "kube"         $false $default
 $neonkube         = Get-ActionInputBool "neonkube"     $false $default
 $tmp              = Get-ActionInputBool "tmp"          $false $default
 $pwshHistory      = Get-ActionInputBool "pwsh-history" $false $default
@@ -149,6 +150,8 @@ try
                                                     
         $distros = $distros.Replace("`0", "")
 
+        # Split the output lines into the list of distro names.
+
         $distros = $distros.Split("`n", [System.StringSplitOptions]::TrimEntries -bor [System.StringSplitOptions]::RemoveEmptyEntries)
 
         foreach ($distro in $distros)
@@ -224,6 +227,19 @@ try
                 docker volume rm "$volume"
             }
         }
+    }
+
+    # Clear the user's [.kube] directory
+
+    if ($neonkube)
+    {
+        Write-Info ""
+        Write-Info "*******************************************************************************"
+        Write-Info "***                          CLEAN [.kube]                                  ***"
+        Write-Info "*******************************************************************************"
+        Write-Info ""
+
+        Clear-Directory "$env:USERPROFILE\.kube" -IgnoreErrors
     }
 
     # Clear the user's [.neonkube] directory
